@@ -37,7 +37,7 @@ function convertCurrency (amount, price, symbol) {
         let total = amount * price;
 
         if(isNaN(total)) {
-            return alert("Por favor, digite o valor corretamente para converter");
+            toast("Por favor, digite o valor corretamente para converter", 3000, 'bottom', 'left', 'red', 'white');
         }
 
         total = formatCurrencyBRL(total).replace("R$", "")
@@ -49,7 +49,7 @@ function convertCurrency (amount, price, symbol) {
     } catch (error) {
         console.log(error)
         footer.classList.remove('show-result')
-        alert("Não foi possível converter. Tente novamente mais tarde.");
+        toast("Não foi possível converter. Tente novamente mais tarde.", 3000, 'bottom', 'left', 'red', 'white');
     }
 }
 
@@ -58,4 +58,20 @@ function formatCurrencyBRL(value) {
         style: "currency",
         currency: "BRL",
     })
+}
+
+function toast(text, duration, gravity, position, background, color) {
+    Toastify({
+        text: text,
+        duration: duration,
+        close: true,
+        gravity: gravity,
+        position: position,
+        stopOnFocus: true,
+        style: {
+          background: background,
+          color: color,
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
 }
